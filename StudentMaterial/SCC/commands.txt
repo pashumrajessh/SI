@@ -1,0 +1,21 @@
+host name: W10-VWKS-1
+
+
+keytool -genkey -alias CCenter -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -keypass password -validity 3650 -dname W10-VWKS-1 -keystore CCenter.keystore -storepass password
+
+Example domain, "CN=CA,OU=unit,O=ABC,L=loc,ST=state,C=CC"
+
+
+keytool -export -alias CCenter  -file ca.crt -rfc -keystore CCenter.keystore -storepass password
+
+
+keytool -genkey -alias SELFCA -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -keypass password -validity 3650 -dname W10-VWKS-1  -keystore CCenter.keystore -storepass password
+
+
+keytool -import -trustcacerts -alias SELFCA -file ca.crt -keystore CCenter.keystore -storepass password
+
+keytool -certreq -alias CCenter -ext BC=ca:true -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -validity 3650 -file "server_cert.csr" -keystore CCenter.keystore -storepass password
+
+keytool -gencert -alias SELFCA -validity 3650 -sigalg SHA512withRSA -infile "server_cert.csr" -outfile "server_signed.crt" -rfc -keystore CCenter.keystore -storepass password 
+
+keytool -importcert -alias CCenter -file server_signed.crt -keystore CCenter.keystore -storepass password 
