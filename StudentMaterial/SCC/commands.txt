@@ -25,3 +25,447 @@ keytool -certreq -alias CCenter -ext BC=ca:true -keyalg RSA -keysize 4096 -sigal
 keytool -gencert -alias CCenter -validity 3650 -sigalg SHA512withRSA -infile "server_cert1.csr" -outfile "server_signed1.crt" -rfc -keystore CCenter.truststore -storepass password 
 
 keytool -importcert -alias CCenter -file server_signed1.crt -keystore CCenter.truststore -storepass password 
+
+C:\IBM\SterlingControlCenter\lib\db2jcc_license_cu.jar
+
+
+
+
+C:\IBM\SterlingControlCenter\bin>config.bat
+IBM Sterling Control Center configuration process...
+Current time is   6:57:47.90
+
+Backing up CCInstall.log file...
+Product Name: IBM Sterling Control Center
+File ../log/CCInstall.log has been renamed to ../log/CCInstall.log_backup_20230228_065748392
+
+Starting Control Center configuration process...
+Product Name: IBM Sterling Control Center
+Info: Loading...common.logging.log4j.LogFactory...
+Info: CC->log4j.LogFactory.defaultConfiguration()..BasicConfigurator.configure()...
+Configuration Directory is 'C:\IBM\SterlingControlCenter\conf'
+
+--------------------------------------------------------------------
+IBM Sterling Control Center Version : 6.2.0.0 - build September 09 2020 13:04
+For detailed IBM Sterling Control Center system requirements, go to the following URL:
+http://www-01.ibm.com/support/docview.wss?uid=swg27036103
+--------------------------------------------------------------------
+Checking 'write' access to configuration files...
+User(user) has 'write' access to configuration files...
+
+--------------------------------------------------------------------
+Config step : Product entitlement configuration step
+--------------------------------------------------------------------
+Entitled Products: IBM Sterling Control Center Director,IBM Sterling Control Center Monitor
+Use configureEntitlement.bat to reconfigure your Control Center entitlement...
+Product entitlement configuration has been done successfully!
+
+--------------------------------------------------------------------
+Config step : *** Pre-Configuration Steps ***
+--------------------------------------------------------------------
+Before proceding with configuration, ensure to have the following:
+1. Database connection details
+2. JDBC Driver file
+3. Keystore and Truststore for secure connection
+4. Package folder for Connect:Direct installers(downloaded from IBM site)
+5. SMTP(Email) Server connection details
+6. External Authentication Server details(Optional)
+
+
+
+Do you want to continue with the configuration? (Y/N)y
+
+--------------------------------------------------------------------
+Config step :  Keystore / truststore configuration ...
+               Warning: Specify a valid keystore.(See the documentation to build one)
+               Otherwise the secure connectors may not start.
+--------------------------------------------------------------------
+
+Keystore and truststore configuration ...
+Provide the path to your java keystore file [..\conf\security\CCenter.keystore] :
+Please provide password to the keystore (at least 6 chars, no blanks) : password
+
+Re-enter Password :password
+
+These are the aliases found in the keystore C:\IBM\SterlingControlCenter\conf\security\CCenter.keystore
+[ccenter]
+Enter Alias for Key: [ccenter] :
+Provide the path to your trust store file [..\conf\security\CCenter.truststore] :
+Please provide password to the trust store (at least 6 chars, no blanks) :password
+
+Re-enter Password :password
+
+
+
+
+You provided the following value(s)
+Keystore file path             : ..\conf\security\CCenter.keystore
+Keystore password              : ********
+Key Alias                      : ccenter
+Truststore file path (optional): ..\conf\security\CCenter.truststore
+Truststore password        : ********
+
+
+Are the values that were entered correct? (Y/N) [Y]
+KeyStore and TrustStore Configuration has been done successfully!
+
+--------------------------------------------------------------------
+Config step :  JDBC driver files installation ...
+For detailed IBM Sterling Control Center system requirements, go to the following URL:
+http://www-01.ibm.com/support/docview.wss?uid=swg27036103
+--------------------------------------------------------------------
+Provide the following database parameters...
+Provide a database type (DB2 or DB2zOS or Oracle or MSSQL)[DB2] :
+Provide the full path to db2jcc.jar or db2jcc4.jar including the file name) : "C:\Program Files\IBM\SQLLIB\java\db2jcc.jar"
+The specified file does not exist ...
+Provide the full path to db2jcc.jar or db2jcc4.jar including the file name) : "C:\Program Files\IBM\SQLLIB\java\db2jcc4.jar"
+The specified file does not exist ...
+Provide the full path to db2jcc.jar or db2jcc4.jar including the file name) : C:\IBM\SterlingControlCenter\lib\db2jcc4.jar
+This jar file requires one of the following license jar files.
+[db2jcc_license_cu.jar, db2jcc_license_cisuz.jar]
+Provide the full path to the license file including the file name) : C:\IBM\SterlingControlCenter\lib\db2jcc_license_cu.jar
+JDBC Driver Class Name : com.ibm.db2.jcc.DB2Driver                                    Major Version : 4     Minor Version: 26
+
+Note: copy db2jcc4.jar, db2jcc_license_cu.jar from "C:\Program Files\IBM\SQLLIB\Java" to C:\IBM\SterlingControlCenter\lib
+
+You provided the following parameters:
+Database type = DB2
+You provided JDBC driver file(s)
+C:\IBM\SterlingControlCenter\lib\db2jcc4.jar
+C:\IBM\SterlingControlCenter\lib\db2jcc_license_cu.jar
+
+
+Are the values that were entered correct? (Y/N) [Y]
+JDBC Driver file(s) installation... Successful
+JDBC driver files installation done successfully!
+
+--------------------------------------------------------------------
+Config step :  Database connection parameters configuration ...
+For detailed IBM Sterling Control Center system requirements, go to the following URL:
+http://www-01.ibm.com/support/docview.wss?uid=swg27036103
+--------------------------------------------------------------------
+Provide the following database connection parameters...
+Do you want to configure a secure connection to your database? (Y/N) [N] :
+Provide the database host name [127.0.0.1] :
+Provide the database port number [50000] :
+Provide the database user name [] : db2admin
+Database Password (no blanks):db2admin
+
+Re-enter Database Password :db2admin
+
+Provide the database name [] : SCCDB
+
+
+You provided the following database connection parameters:
+Database type = DB2
+Secure connection to database = N
+Database host name = 127.0.0.1
+Database port = 50000
+Database user name = db2admin
+Database password = ********
+Database name = SCCDB
+
+
+Are the values that were entered correct? (Y/N) [Y]
+No Root pass phrase found in DB and so generating a new one.
+Updating application.properties with key store/trust store info...
+The SMTP server configuration for IBM Control Center was not completed in this installation location, and no SMTP configuration is in the database.
+No existing product entitlement found in database...
+The SEAS server configuration for IBM Control Center was not completed in this installation location, and no SEAS configuration is in the database.
+
+DB Scripts Directory is 'C:\IBM\SterlingControlCenter\db'
+Registering hostname verifier ...
+MBEAN_INVOKE_TIMEOUT_SECONDS set to 10
+Launch Mode:console
+Verifying required tables on the target DB server  for JDBCService ...
+DB Connection parms configuration ... Successful
+
+DB Scripts Directory is 'C:\IBM\SterlingControlCenter\db'
+
+--------------------------------------------------------------------
+Config step :  Installing root passphrase ...
+--------------------------------------------------------------------
+Root Passphrase already exists for this installation
+
+--------------------------------------------------------------------
+Config step :  Database initialization ...
+--------------------------------------------------------------------
+
+DB Scripts Directory is 'C:\IBM\SterlingControlCenter\db'
+Checking if any other event processor (engine) is running and using this database...
+No other event processor (engine) is currently using this database.
+Executing script 'C:\IBM\SterlingControlCenter\db\drop_tables.sql' ...
+.....................................................
+Executing script 'C:\IBM\SterlingControlCenter\db\create_tables.sql' ...
+.........................................
+Executing script 'C:\IBM\SterlingControlCenter\db\create_configCC_tables.sql' ...
+..................................................................................
+Executing script 'C:\IBM\SterlingControlCenter\db\create_configCC_indexes.sql' ...
+....................
+Executing script 'C:\IBM\SterlingControlCenter\db\create_views.sql' ...
+.........
+Executing script 'C:\IBM\SterlingControlCenter\db\create_db2_indexes.sql' ...
+..............................................................................
+Executing script 'C:\IBM\SterlingControlCenter\db\add_data.sql' ...
+..............................................................................................................................
+Executing script 'C:\IBM\SterlingControlCenter\db\add_data_db2.sql' ...
+.
+Executing script 'C:\IBM\SterlingControlCenter\db\add_typeData.sql' ...
+...............................
+Executing script 'C:\IBM\SterlingControlCenter\db\cc_db2_fixes.sql' ...
+......
+Executing script 'C:\IBM\SterlingControlCenter\db\cc_configCC_db2_fixes.sql' ...
+
+Do you want to partition your database tables? (Y/N)Y
+
+Are you sure about your selection? (Y/N)Y
+Converting tables to partitions...it may take a while...please be patient.
+Starting partitioning conversion of table: EVENTS
+  End of partitioning conversion of table: EVENTS
+Starting partitioning conversion of table: CD_STATS_LOG
+  End of partitioning conversion of table: CD_STATS_LOG
+Starting partitioning conversion of table: CE_STATS_LOG
+  End of partitioning conversion of table: CE_STATS_LOG
+Starting partitioning conversion of table: CX_STATS_LOG
+  End of partitioning conversion of table: CX_STATS_LOG
+Starting partitioning conversion of table: QF_STATS_LOG
+  End of partitioning conversion of table: QF_STATS_LOG
+Starting partitioning conversion of table: MQ_STATS_LOG
+  End of partitioning conversion of table: MQ_STATS_LOG
+Starting partitioning conversion of table: AF_STATS_LOG
+  End of partitioning conversion of table: AF_STATS_LOG
+Starting partitioning conversion of table: BP_STATS_LOG
+  End of partitioning conversion of table: BP_STATS_LOG
+Starting partitioning conversion of table: FG_STATS_LOG
+  End of partitioning conversion of table: FG_STATS_LOG
+Starting partitioning conversion of table: EVENT_COMMENTS
+  End of partitioning conversion of table: EVENT_COMMENTS
+Starting partitioning conversion of table: AUDIT_LOG
+  End of partitioning conversion of table: AUDIT_LOG
+Starting partitioning conversion of table: CC_AUDIT_LOG_CHANGE_SET
+  End of partitioning conversion of table: CC_AUDIT_LOG_CHANGE_SET
+Starting partitioning conversion of table: EVENTS_EXT
+  End of partitioning conversion of table: EVENTS_EXT
+Starting partitioning conversion of table: CC_METRICS
+  End of partitioning conversion of table: CC_METRICS
+Starting partitioning conversion of table: CC_ALERT
+  End of partitioning conversion of table: CC_ALERT
+Partition conversion done.
+DB initialization - Successful
+
+--------------------------------------------------------------------
+Config step :  Default User 'admin' Configuration ...
+--------------------------------------------------------------------
+Default user 'admin' password must be set.
+Enter Default user 'admin' password (no blanks):
+
+The password does not conform to password policy.
+Password may not include your username.
+Enter Default user 'admin' password (no blanks):
+
+The password does not conform to password policy.
+Password may not include your username.
+Enter Default user 'admin' password (no blanks):
+
+The password does not conform to password policy.
+Password may not include your username.
+Enter Default user 'admin' password (no blanks):scc123
+
+Re-enter Default user 'admin' password :scc123
+
+
+
+You provided the following values:
+Default user 'admin' password = ***********
+
+Enter Default user 'admin' E-Mail address (no blanks): admin@ibm.com
+Re-enter Enter Default user 'admin' E-Mail address : admin@ibm.com
+Default user 'admin' password and e-mail has been configured.
+
+Default user 'admin' creation complete ...
+
+--------------------------------------------------------------------
+Config step :  Creating the pre-defined JMS user ...
+--------------------------------------------------------------------
+Pre-defined JMS user creation complete ...
+
+--------------------------------------------------------------------
+Config step :  Event processor (engine) name configuration ...
+--------------------------------------------------------------------
+
+Provide a 10 character Event Processor (engine) name [CCenter] :
+
+
+You provided the following Event Processor (engine) name :
+Event Processor (engine) name  is 'CCenter'
+
+
+Are the values that were entered correct? (Y/N) [Y]
+
+Event Processor (engine) name  has been successfully configured ...
+Creating internal CA, updating trust store and database...
+Updating trust store with internal CA...
+Updating trust store with internal CA..Done.
+Creating internal CA, updating trust store and database...Done
+
+--------------------------------------------------------------------
+Config step :  Engine time zone configuration ...
+--------------------------------------------------------------------
+Default Time Zone : (UTC-08:00) Pacific Time (US & Canada), Tijuana
+
+
+1. (UTC-08:00) Pacific Time (US & Canada), Tijuana
+Choose a time zone number [1] :
+
+
+You chose the following time zone for the IBM Control Center event processor (engine):
+1. (UTC-08:00) Pacific Time (US & Canada), Tijuana
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Engine Time Zone has been successfully configured ...
+
+--------------------------------------------------------------------
+Config step :  HTTP connector configuration (connection between event processor (engine) and the console)...
+--------------------------------------------------------------------
+
+HTTP connector configuration ...
+Provide a port number. (Enter 0 to disable the HTTP) [58080] :
+Provide a listening address for the above port. [0.0.0.0](0.0.0.0- to listen on all addresses): 
+
+
+You provided the following values:
+Port number = 58080
+Listening address for port = 0.0.0.0
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Http Connector configuration complete.
+
+--------------------------------------------------------------------
+Config step :  Secure HTTP connector configuration (connection between Engine and the console)...
+Note: A valid keystore is needed for the secure connection.
+--------------------------------------------------------------------
+
+Do you want to configure the secure HTTP connector? (Y/N)Y
+
+Are you sure about your selection? (Y/N)Y
+
+Secure HTTP connector configuration ...
+Provide a port number.(Enter 0 to disable the HTTPS) [58081] :
+Provide a listening address for the port. [0.0.0.0](0.0.0.0- to listen on all addresses):
+
+
+You provided the following values:
+Port number = 58081
+Listening address for port = 0.0.0.0
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Secure Http Connector configuration has been done successfully!
+
+--------------------------------------------------------------------
+Config step :  Web Application server(Jetty) configuration...
+(This step is required for web client and launch page access.)
+Note: A valid keystore is needed for the secure connection.
+--------------------------------------------------------------------
+
+Jetty Web Application server configuration ...
+Provide a secure port number. (Enter 0 to disable) [58083] :
+Provide the host name of the event processor (engine). [W10-VWKS-1] :
+Provide a listening address for the above port. [0.0.0.0](0.0.0.0- to listen on all addresses): 
+
+
+You provided the following values:
+Web Application server secure port = 58083
+Event processor (engine) host name = W10-VWKS-1
+Listening address for port = 0.0.0.0
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Jetty Web Application server configuration complete.
+
+--------------------------------------------------------------------
+Config step :  Package path configuration ...
+--------------------------------------------------------------------
+
+Package Configuration ...
+Provide the path to your package folder [..\packages] :
+Packages location path is : C:\IBM\SterlingControlCenter\packages
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Updating application.properties with package path...
+Packages location path configuraiton done successfully!
+
+--------------------------------------------------------------------
+Config step : Event repository configuration ...
+--------------------------------------------------------------------
+Do you want to enable authentication for the Event Repository? (Y/N) [N] :
+
+Are you sure about your selection? (Y/N)Y
+InstallationInfo.properties updated for EVENT_REPOSITORY_AUTH with false
+
+--------------------------------------------------------------------
+Config step : Email (SMTP) server configuration ...
+--------------------------------------------------------------------
+Important: To create additional Control Center users, you must provide a valid, working email server connection details.
+
+
+
+Email host name? [localhost] :
+Email port number? [25] :
+Email user name? Enter dot (.) for none. [] : .
+Enter user password (no blanks). Enter dot (.) for none.
+
+Re-Enter user password (no blanks). Enter dot (.) for none.
+
+Email from address? [noone@anywhere] :
+Designated Administrator email address? [admin@ibm.com] :
+
+
+You provided the following email configuration options:
+Email host name = localhost
+Email port number = 25
+Email user name =
+Email password = ********
+Email from address = noone@anywhere
+IBM Control Center's designated administrator email address = admin@ibm.com
+
+Checking whether the specified email server (localhost) is listening (on port 25) or not...
+Unable to connect to the specified SMTP(EMail) server.
+*** Warning ***: New Control Center users cannot be created without a valid SMTP(EMail) server.
+
+
+Are the values that were entered correct? (Y/N) [Y]
+Updating application.properties with SMTP info...
+The email configuration is completed successfully!
+
+--------------------------------------------------------------------
+Config step : JMS configuration ...
+--------------------------------------------------------------------
+Do you want to enable JMS events? (Y/N) [n] :
+
+Are you sure about your selection? (Y/N)Y
+JMS successfully configured ...
+
+--------------------------------------------------------------------
+Config step : External Authentication Server configuration ...
+--------------------------------------------------------------------
+
+Do you want to configure External Authentication Server connection settings(Y/N)?N
+
+Are you sure about your selection? (Y/N)Y
+External Authentication Server connection settings completed successfully!
+
+The IBM Control Center event processor (engine) configuration is complete.
+
+
+C:\IBM\SterlingControlCenter\bin>
+
+
+
+
+
+
+
